@@ -34,9 +34,11 @@ def eurovision(*args):
     else:
         return spisok
 
+    
 @app.route("/")
 def hello():
     return "Hello, World!"
+
 
 @app.route("/send", methods= ['POST'])
 def send_message():
@@ -68,6 +70,7 @@ def send_message():
     }
     db.append(message)
     return {'ok': True}
+
 
 @app.route("/messages")
 def get_messages():
@@ -138,26 +141,23 @@ def get_messages():
                     else:
                         db_after.append(error)
 
-
     return {'messages': db_after}
+
 
 @app.route("/status")
 def print_status():
     for message in db:
         if message['name'] not in set(db_names) and message['name'] != 'Анонимный пользователь':
             db_names.append(message['name'])
-    n_users = len(db_names)
-    n_msgs = len(db)
     t = time.time()
     dt = datetime.fromtimestamp(t)
     status = {
         'Текущие дата и время': dt.strftime('%Y-%m-%d %H:%M:%S'),
         'Пользователи': db_names,
-        'Количество пользователей': n_users,
-        'Количество сообщений': n_msgs
+        'Количество пользователей': len(db_names),
+        'Количество сообщений': len(db)
     }
-    info = json.dumps(status, ensure_ascii=False)
-    return info
+    return json.dumps(status, ensure_ascii=False)
 
 
 
