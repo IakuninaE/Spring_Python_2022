@@ -19,7 +19,7 @@ def is_int(n):
 
 def eurovision(*args):
     spisok = {1: 'Urkaine: Kalush Orchestra - Stefania', 2: 'United Kingdom: Sam Ryder - SPACE MAN', 3: 'Spain: Chanel - SloMo',
-            4: 'Sweden: Cornelia Jakobs - Hold Me Closer', 5: 'Konstrakta - In Corpore Sano', 6: \
+            4: 'Sweden: Cornelia Jakobs - Hold Me Closer', 5: 'Serbia: Konstrakta - In Corpore Sano', 6: \
                 'Italy: Mahmood & Blanco - Brividi', 7: 'Moldova: Zdob şi Zdub & Advahov Brothers - Trenulețul',
             8: 'Greece: Amanda Georgiadi Tenfjord - Die Together', 9: 'Portugal: MARO - Saudade Saudade',
             10: 'Norway: Subwoolfer - Give That Wolf A Banana', 11: 'Netherlands: S10 - De Diepte',
@@ -28,7 +28,7 @@ def eurovision(*args):
             17: 'Switzerland: Marius Bear - Boys Do Cry', 18: 'Romania: WRS - Llámame', 19: \
                 'Belgium: Jérémie Makiese - Miss You', 20: 'Armenia: Rosa Linn - Snap', 21: \
                 'Finland: The Rasmus - Jezebel', 22: 'Czech Republic: We Are Domi - Lights Off',
-            23: 'Iceland: Systur - Með Hækkandi', 24: 'Alvan & Ahez - Fulenn', 25: 'Germany: Malik Harris - Rockstars'}
+            23: 'Iceland: Systur - Með Hækkandi', 24: 'France: Alvan & Ahez - Fulenn', 25: 'Germany: Malik Harris - Rockstars'}
     if args:
         return spisok.get(*args)
     else:
@@ -104,7 +104,7 @@ def get_messages():
 
         if com[:5] == '!euro' and message['time'] > after:
             error = {
-                'text': 'Команда !euro работает самостоятельно или принимает одно целое число от 1 до 25 через пробел',
+                'text': 'Команда !euro работает самостоятельно без пробелов или принимает одно целое число от 1 до 25 через пробел',
                 'name': 'Eurobot',
                 'time': time.time()
             }
@@ -115,7 +115,7 @@ def get_messages():
                 # проверка, что команда либо без аргумента, либо с одним
                 if len(words) > 2:
                     db_after.append(error)
-                # выводим весь список финалистов с занятыми ими местами в порядке возрастания мест
+                # выводим весь список финалистов с занятыми ими местами от наивысшего
                 elif len(words) == 1:
                     answer = {
                         'text': eurovision(),
